@@ -6,6 +6,7 @@ import os
 # Define the blueprint for the app routes
 app = Blueprint('app', __name__)
 
+# Develop a highlighted satellite image that mimics the detection of large crops
 def process_image(image_path):
     # Construct the full image path and ensure the image exists
     image_path = os.path.join(current_app.root_path, 'static', image_path)
