@@ -1,0 +1,188 @@
+<!-- app/templates/valuation.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1>Valuation reports</h1>
+    <p>AI-driven crop valuation and personalised policy advice for the agricultural business.</p>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select policy holder
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">De Groene Akker</a>
+                    <a class="dropdown-item" href="#">De Zonnewende</a>
+                    <a class="dropdown-item" href="#">Boerderij De Gouden Kaas</a>
+                    <a class="dropdown-item" href="#">Hof van Rust</a>
+                    <a class="dropdown-item" href="#">Windmill Hoeve</a>
+                </div>
+            </div>
+            <h3>Farmer Henk</h3>
+        </div>
+        <div class="col-md-6">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select valuation date
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                    <a class="dropdown-item" href="#">Date 1</a>
+                    <a class="dropdown-item" href="#">Date 2</a>
+                    <a class="dropdown-item" href="#">Date 3</a>
+                    <a class="dropdown-item" href="#">Date 4</a>
+                    <a class="dropdown-item" href="#">Date 5</a>
+                </div>
+            </div>
+            <th>30-06-2024</th>
+        </div>
+    </div>
+
+    {% if large_crops %}
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h4>Crop type satellite analysis</h4>
+            <figure>
+                <img src="{{ url_for('static', filename=output_image_path) }}" class="img-fluid" alt="Farmer Henk croptypes">
+                <figcaption>Satellite image from 14-06-2024</figcaption>
+            </figure>
+        </div>
+        <div class="col-md-6">
+            <h4>Crop details</h4>
+            <h6 style="font-weight: normal;">Latest update: 24-06-2024</h6>
+
+            <table class="table table-bordered table-hover table-striped text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Crop type</th>
+                        {% for crop in large_crops %}
+                            <th>{{ crop_type_mapping[loop.index0]['name'] }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-weight-bold">Days till harvest</td>
+                        {% for crop in large_crops %}
+                            <td>{{ crop_type_mapping[loop.index0]['days_till_harvest'] }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold">Planting date</td>
+                        {% for crop in large_crops %}
+                            <td>{{ crop_type_mapping[loop.index0]['planting_date'] }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold">Crop health</td>
+                        {% for crop in large_crops %}
+                            <td>{{ crop_type_mapping[loop.index0]['crop_health'] }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold">Hectares</td>
+                        {% for crop in large_crops %}
+                            <td>{{ crop[0] }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold">Market Price per m2 (€)</td>
+                        {% for crop in large_crops %}
+                            <td>{{ crop_type_mapping[loop.index0]['price_per_m2'] }}</td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+    <div class="container mt-5">
+        <h4>Executive summary:</h4>
+        <p>
+            This report gives a detailed valuation of Farmer Henk’s crop insurance as of June 30, 2024. The crops
+            are valued at €56,134.47 based on the latest analysis using advanced data analytics and artificial
+            intelligence. Land area of crops, as well as crop health are detected with the use of satellite image
+            recognition and deep learning models. Predictive modeling has been used to calculate the valuation, while
+            taking into account crop yield, crop health, market prices and land area.
+        </p>
+
+        <h4>Crop analysis:</h4>
+        <p>
+            Farmer Henk cultivates three primary crop types, listed in order of land area from largest to smallest:
+        </p>
+        <ol>
+            <li>Wheat - 3.37 hectares</li>
+            <li>Potatoes - 3.18 hectares</li>
+            <li>Sugarbeet - 0.30 hectares</li>
+        </ol>
+        <p>
+            The health of the crops ranges from decent to very healthy. The current valuation is slightly elevated
+            due to the upcoming harvest season, which boosts market expectations and projected yields.
+        </p>
+
+        <p>
+            Compared to the previous valuation on July 14, 2023, the total crop value has significantly increased
+            from €34,287.69 to €56,134.47. This growth is mainly due to the expansion of wheat cultivation, with
+            the land area rising from 1.21 hectares to 3.37 hectares.
+        </p>
+            Given the substantial increase in land area dedicated to wheat, it is advisable to adjust Farmer Henk's
+            insurance policy. The updated valuation accounts for the expanded crop area and the improved health and
+            yield potential, as assessed by our predictive models.
+        </p>
+
+        <table class="table table-bordered table-hover table-striped text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Crop type</th>
+                    <th>Total value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="font-weight-bold">Potatoes</td>
+                    <td>€{{24,284.93}}</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Sugarbeet</td>
+                    <td>€{{3,456.89}}</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Wheat</td>
+                    <td>€{{28,392.65}}</td>
+                </tr>
+                <tr class="table-info font-weight-bold">
+                    <td>Total</td>
+                    <td>€{{56,134.47}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="container mt-5">
+        <h4>Current policy</h4>
+        <p>Farmer Henk's crop insurance coverage is €34,287.69 with 5% deductible risk of €1,714.38. The crop
+            insurance covers damages to crops caused by:
+        </p>
+        <ul>
+            <li>Weather events (hail, snow, wind, floods)</li>
+            <li>Pests and diseases</li>
+            <li>Fire</li>
+            <li>Vandalism</li>
+        </ul>
+
+        <h4>Policy advice</h4>
+        <p>
+            Farmers Henk’s crops are under-insured. To avoid risk and credit issues, we advise to update the
+            insurance policy to reflect changes in crop values. Based on the new valuation, we recommend the
+            following policy adjustments:
+        </p>
+        <ul>
+            <li>Raise crop insurance coverage with €21,846.78 to €56,134.47, to protect against potential crop losses.</li>
+        </ul>
+    </div>
+
+</div>
+{% endblock %}
+
+

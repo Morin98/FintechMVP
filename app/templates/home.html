@@ -1,0 +1,12 @@
+<!-- app/templates/home.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to SkyAI</h1>
+    <p class="lead">Revolutionizing agricultural insurance with AI-powered models.</p>
+    <hr class="my-4">
+    <p>Our services leverage AI to provide quicker and more effective insurance procedures for agricultural businesses.</p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('app.valuation') }}" role="button">Learn more</a>
+</div>
+{% endblock %}
